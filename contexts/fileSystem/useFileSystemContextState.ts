@@ -31,7 +31,6 @@ import type { UpdateFiles } from "contexts/session/types";
 import { basename, dirname, isAbsolute, join } from "path";
 import * as BrowserFS from "public/System/BrowserFS/browserfs.min.js";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { fetchCloudFiles } from "./cloud";
 import {
   CLIPBOARD_FILE_EXTENSIONS,
   DEFAULT_MAPPED_NAME,
@@ -490,65 +489,6 @@ const useFileSystemContextState = (): FileSystemContextState => {
           }
         }
       }
-  useEffect(() => {
-    if (!restoredFsHandles.current && rootFs) {
-      const restoreFsHandles = async (): Promise<void> => {
-        ...
-      };
-
-      restoreFsHandles();
-    }
-  }, [exists, mapFs, rootFs]);
-  useEffect(() => {
-    if (!restoredFsHandles.current && rootFs) {
-      const restoreFsHandles = async (): Promise<void> => {
-        ...
-      };
-
-      restoreFsHandles();
-    }
-  }, [exists, mapFs, rootFs]);
-        // --- Cloud Sync Effect ---
-  useEffect(() => {
-    const enableCloud =
-      process.env.NEXT_PUBLIC_ENABLE_CLOUD === "true" ||
-      process.env.NODE_ENV === "production";
-
-    if (!enableCloud) return;
-
-    let mounted = true;
-
-    (async () => {
-      try {
-        const cloudFiles = await fetchCloudFiles();
-        if (!mounted || !cloudFiles?.length) return;
-
-        const portfolioPath = "/Portfolio";
-
-        // Ensure the Portfolio folder exists
-        await mkdirRecursive(portfolioPath);
-
-        // Save all fetched files into the Portfolio folder
-        for (const file of cloudFiles) {
-          const filePath = `${portfolioPath}/${file.name}`;
-          const response = await fetch(file.url);
-          const blob = await response.blob();
-          const buffer = Buffer.from(await blob.arrayBuffer());
-          await writeFile(filePath, buffer);
-          updateFolder(portfolioPath, file.name);
-        }
-
-        console.log("✅ Cloud files synced to", portfolioPath);
-      } catch (err) {
-        console.error("❌ Cloud sync failed:", err);
-      }
-    })();
-
-    return () => {
-      mounted = false;
-    };
-  }, [mkdirRecursive, updateFolder, writeFile]);
-
 
       return "";
     },
@@ -604,3 +544,4 @@ const useFileSystemContextState = (): FileSystemContextState => {
 };
 
 export default useFileSystemContextState;
+
