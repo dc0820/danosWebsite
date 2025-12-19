@@ -254,7 +254,7 @@ yarn start
 ##### Docker
 
 ```
-docker build -t daedalos .
+docker build -t danos .
 docker run -dp 8080:8080 --rm --name danos danos
 ```
 
