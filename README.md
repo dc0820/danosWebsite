@@ -255,9 +255,9 @@ yarn start
 
 ```
 docker build -t daedalos .
-docker run -dp 8080:8080 --rm --name daedalos daedalos
+docker run -dp 8080:8080 --rm --name danos danos
 ```
 
 ##### Notes
 
-- If during `yarn install` you receive the error `digital envelope routines::unsupported`, you need to set `NODE_OPTIONS` to `--openssl-legacy-provider` ([1](https://github.com/DustinBrett/daedalOS/blob/main/Dockerfile#L3), [2](https://github.com/DustinBrett/daedalOS/blob/main/.github/workflows/main.yml#L17), [3](https://stackoverflow.com/a/69699772/5895982))
+- If during `yarn install` you receive the error `digital envelope routines::unsupported`, you need to set `NODE_OPTIONS` to `--openssl-legacy-provider` [1](https://stackoverflow.com/a/69699772/5895982))
