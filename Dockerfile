@@ -8,7 +8,7 @@ ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN apk add --no-cache git
 
 # Set the working directory in the Docker image.
-WORKDIR /daedalOS
+WORKDIR /danosWebsite
 
 # Copy all files from the current directory on your computer to the Docker image.
 COPY . .
