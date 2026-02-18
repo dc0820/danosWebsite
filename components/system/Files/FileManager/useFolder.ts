@@ -296,6 +296,7 @@ const useFolder = (
     [
       blurEntry,
       closeProcessesByUrl,
+      deletePath,
       directory,
       exists,
       hideFolders,
