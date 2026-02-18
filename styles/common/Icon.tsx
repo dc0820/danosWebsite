@@ -56,7 +56,9 @@ const Icon = forwardRef<
     src.startsWith("data:") ||
     src.startsWith(ICON_CACHE) ||
     src.startsWith(YT_ICON_CACHE) ||
-    src.endsWith(".ico");
+    src.endsWith(".ico") ||
+    src.endsWith(".png") ||
+    src.endsWith(".svg");
   const dimensionProps = useMemo(() => {
     const size = displaySize > imgSize ? imgSize : displaySize || imgSize;
     const $offset = displaySize > imgSize ? `${displaySize - imgSize}px` : 0;

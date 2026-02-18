@@ -67,6 +67,13 @@ const Metadata: FC = () => {
         : imageSrc(favIcon, 16, getDpi(), ".webp").split(" ")[0],
     [favIcon]
   );
+  const currentFavIconType = useMemo(() => {
+    if (currentFavIcon.endsWith(".svg")) return "image/svg+xml";
+    if (currentFavIcon.endsWith(".png")) return "image/png";
+    if (currentFavIcon.endsWith(".ico")) return "image/x-icon";
+
+    return "image/webp";
+  }, [currentFavIcon]);
   const getCursor = useCallback(
     async (path: string) => {
       const imageBuffer = await readFile(path);
@@ -132,7 +139,7 @@ const Metadata: FC = () => {
     <Head>
       <title>{title}</title>
       {currentFavIcon && (
-        <link href={currentFavIcon} rel="icon" type="image/webp" />
+        <link href={currentFavIcon} rel="icon" type={currentFavIconType} />
       )}
       <meta
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"

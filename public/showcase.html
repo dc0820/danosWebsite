@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daniel Cook - Showcase 2023</title>
+    <style>
+      @font-face {
+        font-family: MSSerif;
+        src: url("/showcase/assets/fonts/MSSansSerif.ttf");
+      }
+
+      @font-face {
+        font-family: Millennium;
+        src: url("/showcase/assets/fonts/Millennium.ttf");
+      }
+
+      @font-face {
+        font-family: MillenniumBold;
+        src: url("/showcase/assets/fonts/Millennium-Bold.ttf");
+      }
+
+      @font-face {
+        font-family: Terminal;
+        src: url("/showcase/assets/fonts/Terminal.ttf");
+      }
+
+      :root {
+        --title-blue: #0000aa;
+        --surface: #efefef;
+        --ink: #000;
+        --link: #0000ee;
+        --panel-border: #7f7f7f;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #c0c0c0;
+        color: var(--ink);
+        font-family: Millennium, "Times New Roman", serif;
+        scroll-behavior: smooth;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+      }
+
+      h1 {
+        font-family: MillenniumBold, "Times New Roman", serif;
+        font-size: 84px;
+      }
+
+      h2 {
+        font-family: MillenniumBold, "Times New Roman", serif;
+        font-size: 48px;
+      }
+
+      h3 {
+        font-family: MillenniumBold, "Times New Roman", serif;
+        font-size: 34px;
+      }
+
+      h4 {
+        font-family: MillenniumBold, "Times New Roman", serif;
+        font-size: 24px;
+      }
+
+      a {
+        color: var(--link);
+      }
+
+      .window {
+        margin: 4px;
+        height: calc(100vh - 8px);
+        border: 2px solid var(--panel-border);
+        background: var(--surface);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .title {
+        background: var(--title-blue);
+        color: #fff;
+        font-family: MSSerif, sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 4px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .body {
+        flex: 1;
+        display: flex;
+        min-height: 0;
+      }
+
+      .sidebar {
+        width: 280px;
+        border-right: 1px solid #9f9f9f;
+        padding: 28px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        overflow-y: auto;
+      }
+
+      .brand h1 {
+        font-size: 56px;
+        line-height: 0.95;
+      }
+
+      .brand h3 {
+        margin-top: 10px;
+        font-size: 40px;
+      }
+
+      .nav {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        font-size: 22px;
+        font-family: MillenniumBold, "Times New Roman", serif;
+      }
+
+      .nav a {
+        text-decoration: underline;
+      }
+
+      .subnav {
+        margin-left: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 18px;
+      }
+
+      .project-card {
+        border: 1px solid #777;
+        padding: 18px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .project-card img {
+        width: 52px;
+        height: 52px;
+        image-rendering: pixelated;
+      }
+
+      .project-card h3 {
+        margin: 0;
+        line-height: 1;
+      }
+
+      .project-card p {
+        font-size: 26px;
+        font-family: MillenniumBold, "Times New Roman", serif;
+      }
+
+      .for-hire {
+        margin-top: auto;
+      }
+
+      .for-hire img {
+        width: 100%;
+        max-width: 170px;
+      }
+
+      .content {
+        flex: 1;
+        min-width: 0;
+        overflow: auto;
+        padding: 22px 20px 32px;
+      }
+
+      .section {
+        margin-bottom: 28px;
+      }
+
+      .section-title {
+        margin-bottom: 8px;
+      }
+
+      .resume {
+        border-top: 2px solid #222;
+        border-bottom: 2px solid #222;
+        padding: 12px 0;
+        margin: 20px 0 24px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .resume img {
+        width: 72px;
+        height: 62px;
+      }
+
+      .resume .copy {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .resume .copy h3 {
+        font-size: 32px;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+
+      .captioned {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 18px;
+        margin-bottom: 10px;
+      }
+
+      .captioned img,
+      .captioned video {
+        width: 100%;
+        max-width: 1240px;
+      }
+
+      .captioned p {
+        margin-top: 8px;
+        font-size: 13px;
+      }
+
+      ul {
+        margin: 12px 0 0 24px;
+        padding: 0 0 0 18px;
+      }
+
+      li {
+        font-size: 17px;
+        margin-bottom: 12px;
+      }
+
+      .socials {
+        display: flex;
+        gap: 10px;
+      }
+
+      .socials a {
+        width: 58px;
+        height: 58px;
+        border: 1px solid #777;
+        display: grid;
+        place-items: center;
+        background: #fff;
+      }
+
+      .socials img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .easter {
+        margin-top: 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .easter button {
+        border: none;
+        background: transparent;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      .easter img {
+        width: 16px;
+        height: 16px;
+      }
+
+      .easter-target {
+        display: none;
+      }
+
+      .easter-target img {
+        width: 100%;
+        max-width: 720px;
+        margin-top: 10px;
+      }
+
+      .easter-target:target {
+        display: block;
+      }
+
+      .footer {
+        border-top: 2px solid #9f9f9f;
+        background: #d4d4d4;
+        font-family: MSSerif, sans-serif;
+        font-size: 14px;
+        padding: 4px 8px;
+      }
+
+      @media (max-width: 1500px) {
+        p {
+          font-size: 16px;
+        }
+
+        h1 {
+          font-size: 58px;
+        }
+
+        h2 {
+          font-size: 34px;
+        }
+
+        h3 {
+          font-size: 26px;
+        }
+
+        h4 {
+          font-size: 18px;
+        }
+
+        li {
+          font-size: 15px;
+        }
+
+        .sidebar {
+          width: 240px;
+          padding: 20px 14px;
+        }
+
+        .brand h1 {
+          font-size: 44px;
+        }
+
+        .brand h3 {
+          font-size: 30px;
+        }
+
+        .nav {
+          font-size: 18px;
+          gap: 10px;
+        }
+
+        .subnav {
+          font-size: 15px;
+        }
+
+        .project-card p {
+          font-size: 18px;
+        }
+
+        .resume .copy h3 {
+          font-size: 24px;
+        }
+
+        .footer {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="window">
+      <header class="title">
+        <span>Daniel Cook - Showcase 2023</span>
+        <span aria-hidden="true"></span>
+      </header>
+
+      <div class="body">
+        <aside class="sidebar">
+          <div class="brand">
+            <h1>Daniel Cook</h1>
+            <h3>Showcase '23-current</h3>
+          </div>
+
+          <nav class="nav">
+            <a href="#home">HOME</a>
+            <a href="#about">ABOUT</a>
+            <a href="#experience">EXPERIENCE</a>
+            <a href="#projects">PROJECTS</a>
+            <div class="subnav">
+              <a href="#software">SOFTWARE</a>
+            </div>
+            <a href="#contact">CONTACT</a>
+          </nav>
+
+          <a class="for-hire" href="#contact" title="Contact me">
+            <img src="/showcase/assets/pictures/forHireGif.gif" alt="For Hire" />
+          </a>
+        </aside>
+
+        <section class="content">
+          <article class="section" id="home">
+            <h1 class="section-title">Welcome</h1>
+            <h2>I'm Daniel Cook</h2>
+            <br />
+            <p>
+              Welcome to one of my primary projects and main work portfolio.
+              This site is part of my DanOS web desktop experience and
+              highlights my cybersecurity and software work.
+            </p>
+            <br />
+            <p>
+              Main website:
+              <a href="https://www.danielcook.org" target="_blank" rel="noreferrer">
+                danielcook.org
+              </a>
+            </p>
+            <p>
+              Other project websites:
+              <a href="https://2-dos.vercel.app/" target="_blank" rel="noreferrer">
+                2Dos Web App
+              </a>
+              |
+              <a
+                href="https://curb-craft.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Curb Craft
+              </a>
+            </p>
+            <p>
+              Portfolio repositories:
+              <a
+                href="https://github.com/dc0820/Python-Projects"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Python Projects
+              </a>
+              |
+              <a
+                href="https://github.com/dc0820/Google-Cybersecurity"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Google Cybersecurity
+              </a>
+              |
+              <a href="https://github.com/dc0820/UTSA-Labs" target="_blank" rel="noreferrer">
+                UTSA Labs
+              </a>
+            </p>
+            <p>
+              GitHub:
+              <a href="https://github.com/dc0820" target="_blank" rel="noreferrer">
+                dc0820
+              </a>
+            </p>
+          </article>
+
+          <div class="resume">
+            <img src="/showcase/assets/resume/printer.gif" alt="" />
+            <div class="copy">
+              <h3>Looking for my resume?</h3>
+              <a
+                href="/showcase/assets/resume/DanielWCook_Resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <p>Click here to download it!</p>
+              </a>
+            </div>
+          </div>
+
+          <article class="section" id="about">
+            <h2>About Me</h2>
+            <br />
+            <p>
+              Born in San Antonio, Texas, I was introduced to computers by my
+              dad, who was in the Air Force. I started building computers at
+              the age of 5, and by 11 I had built over 10 computers. By 14, I
+              was diving into security software and exploring Kali Linux across
+              multiple platforms.
+            </p>
+            <br />
+            <p>
+              From 2020 to 2024, I studied at the University of Texas at San
+              Antonio, where I focused on cybersecurity and hands-on technical
+              experience.
+            </p>
+
+            <div class="two-col">
+              <div class="captioned">
+                <img
+                  src="/showcase/assets/pictures/workingAtComputer.jpg"
+                  alt="Young Daniel"
+                />
+                <p><sub>Figure 1: A real photo of me younger</sub></p>
+              </div>
+              <div class="captioned">
+                <img src="/showcase/assets/pictures/currentme.jpg" alt="Daniel now" />
+                <p><sub>Figure 2: Me, June 2023</sub></p>
+              </div>
+            </div>
+
+            <p>
+              I enjoy building software, cyber labs, and projects that blend
+              design with security.
+            </p>
+
+            <div class="easter">
+              <a href="#easter-egg">
+                <img src="/showcase/assets/pictures/sparkles.gif" alt="Easter egg trigger" />
+              </a>
+            </div>
+            <div class="easter-target" id="easter-egg">
+              <img src="/showcase/assets/pictures/ee.jpg" alt="Easter egg" />
+            </div>
+          </article>
+
+          <article class="section" id="experience">
+            <h2>Experience</h2>
+            <br />
+            <h3>Outlier.ai</h3>
+            <h4>Generative AI Engineer (Freelance) · Remote</h4>
+            <ul>
+              <li>Tuned AI models for code generation and NLP tasks.</li>
+              <li>
+                Integrated Python filtering scripts into human-in-the-loop
+                workflows.
+              </li>
+              <li>Improved reliability and response quality across tasks.</li>
+            </ul>
+            <br />
+            <h3>University of Texas at San Antonio</h3>
+            <h4>Teaching Assistant - Malware Analysis</h4>
+            <ul>
+              <li>
+                Assisted students with static/dynamic malware analysis and YARA.
+              </li>
+              <li>
+                Ran labs using PEStudio, string analysis, and sandbox workflows.
+              </li>
+            </ul>
+            <br />
+            <h3>UniFirst</h3>
+            <h4>Customer Service Representative · San Antonio, Texas</h4>
+            <ul>
+              <li>
+                Managed customer inquiries and internal systems while maintaining
+                high satisfaction and response quality.
+              </li>
+            </ul>
+            <br />
+            <h3>Best Buy</h3>
+            <h4>Sales - Computers (Seasonal) · Corpus Christi, Texas</h4>
+            <ul>
+              <li>
+                Supported computer sales and customer consultations during
+                seasonal demand periods.
+              </li>
+            </ul>
+            <br />
+            <h2>Skills</h2>
+            <ul>
+              <li>
+                Languages/Tools: Python, React, Java, JavaScript, TypeScript,
+                SQL, Git, Docker
+              </li>
+              <li>
+                Cybersecurity & Cloud: Azure, Malware Analysis, SIEM
+                (Splunk/ELK), Vulnerability Management, Penetration Testing,
+                Wireshark, PEStudio, YARA, pfSense, Kali Linux, Burp Suite
+              </li>
+              <li>
+                Security Techniques: Threat Hunting, Reverse Engineering,
+                IDS/IPS Setup, Log Analysis, Network Hardening, Scripting, XUnit
+              </li>
+              <li>
+                Other: Full-Stack Development, GitHub, CI/CD, Microservices,
+                Distributed Systems
+              </li>
+            </ul>
+            <br />
+            <h2>Community Involvement</h2>
+            <h3>100 Club of San Antonio</h3>
+            <h4>Volunteer · Apr 2022 - Aug 2024</h4>
+            <ul>
+              <li>
+                Supported public fundraisers and parades for families of fallen
+                first responders.
+              </li>
+            </ul>
+          </article>
+
+          <article class="section" id="projects">
+            <h2>Projects</h2>
+            <p>
+              Click below to explore my software projects.
+            </p>
+            <br />
+            <a class="project-card" href="#software">
+              <img src="/showcase/assets/projects/software.gif" alt="" />
+              <div>
+                <h3>Software</h3>
+                <p>PROJECTS</p>
+              </div>
+            </a>
+          </article>
+
+          <article class="section" id="software">
+            <h2>Software Projects</h2>
+            <p>
+              danielcook.org and related portfolio systems were built as an
+              interactive operating system experience with React and Next.js.
+            </p>
+            <br />
+            <h3>Home Lab - Offensive & Defensive Security</h3>
+            <p>
+              Created a full virtual environment using VirtualBox, pfSense, and
+              Kali Linux, simulating attacks, privilege escalation, and firewall
+              configurations.
+            </p>
+            <br />
+            <h3>SIEM Log Analysis & Threat Detection</h3>
+            <p>
+              Deployed a Splunk-based SIEM to analyze logs from Windows and Linux
+              VMs, then built dashboards and alerts for suspicious activity.
+            </p>
+            <br />
+            <h3>Wireless Network Security Audit</h3>
+            <p>
+              Audited home wireless networks with aircrack-ng, Wireshark, and
+              Kismet, and produced remediation reports with CVSS scoring.
+            </p>
+            <br />
+            <div class="captioned">
+              <video controls muted playsinline>
+                <source
+                  src="/showcase/assets/projects/software/websiteOS.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <p><sub>Figure 3: Portfolio OS screen recording</sub></p>
+            </div>
+            <div class="captioned">
+              <video controls muted playsinline>
+                <source
+                  src="/showcase/assets/projects/software/guiSCAN.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <p><sub>Figure 4: guiSCAN project demo</sub></p>
+            </div>
+            <div class="captioned">
+              <video controls muted playsinline>
+                <source
+                  src="/showcase/assets/projects/software/computer.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <p><sub>Figure 5: Computer project demo</sub></p>
+            </div>
+            <p>
+              I created this website for my curb appeal business, spray
+              painting customers' curbs with fashionable presentation options
+              such as basic, sports, and custom designs.
+            </p>
+            <div class="captioned">
+              <video controls muted playsinline>
+                <source
+                  src="/showcase/assets/projects/software/Curb-craft-webpage.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <p><sub>Figure 6: Curb Craft website demo</sub></p>
+            </div>
+          </article>
+
+          <article class="section" id="contact">
+            <h2>Contact</h2>
+            <p>
+              Email:
+              <a href="mailto:danielwcook5@gmail.com"> danielwcook5@gmail.com</a>
+            </p>
+            <br />
+            <div class="socials">
+              <a
+                href="https://github.com/dc0820"
+                target="_blank"
+                rel="noreferrer"
+                title="GitHub"
+              >
+                <img src="/showcase/assets/pictures/contact-gh.png" alt="GitHub" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/danielwaynecook/"
+                target="_blank"
+                rel="noreferrer"
+                title="LinkedIn"
+              >
+                <img src="/showcase/assets/pictures/contact-in.png" alt="LinkedIn" />
+              </a>
+              <a
+                href="https://twitter.com/d_wayne_c"
+                target="_blank"
+                rel="noreferrer"
+                title="Twitter"
+              >
+                <img
+                  src="/showcase/assets/pictures/contact-twitter.png"
+                  alt="Twitter"
+                />
+              </a>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <footer class="footer">Copyright 2023 Daniel Cook</footer>
+    </main>
+  </body>
+</html>

@@ -371,8 +371,9 @@ export const getInfoWithExtension = (
 
           callback({ comment, getIcon, icon, pid, subIcons, url });
         } else if (
-          DYNAMIC_EXTENSION.has(urlExt) ||
-          DYNAMIC_PREFIX.some((prefix) => url.startsWith(prefix))
+          !icon &&
+          (DYNAMIC_EXTENSION.has(urlExt) ||
+            DYNAMIC_PREFIX.some((prefix) => url.startsWith(prefix)))
         ) {
           const isCachedUrl = DYNAMIC_EXTENSION.has(urlExt);
           const cachedIconPath = join(

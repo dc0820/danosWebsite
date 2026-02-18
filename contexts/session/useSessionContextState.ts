@@ -1,5 +1,6 @@
 import type { ApiError } from "browserfs/dist/node/core/api_error";
 import type { SortBy } from "components/system/Files/FileManager/useSortBy";
+import { createShortcut } from "components/system/Files/FileEntry/functions";
 import { useFileSystem } from "contexts/fileSystem";
 import type {
   IconPositions,
@@ -9,7 +10,7 @@ import type {
   WallpaperFit,
   WindowStates,
 } from "contexts/session/types";
-import { dirname } from "path";
+import { dirname, join } from "path";
 import defaultSession from "public/session.json";
 import type { SetStateAction } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -196,6 +197,38 @@ const useSessionContextState = (): SessionContextState => {
         initializedSession.current = true;
 
         try {
+          try {
+            const desktopPath = DESKTOP_PATH;
+            const desktopEntries = await readdir(desktopPath);
+            const showcaseShortcut = "Showcase.url";
+            const showcaseUrl = `${window.location.origin}/showcase.html`;
+            const legacyAboutMeEntries = desktopEntries.filter((entry) =>
+              /^aboutme\.md(\.url)?$/i.test(entry)
+            );
+            await writeFile(
+              join(desktopPath, showcaseShortcut),
+              createShortcut({
+                BaseURL: "Browser",
+                Comment: "Daniel Cook Showcase 2023",
+                IconFile: "/showcase/assets/icons/showcaseIcon.png",
+                URL: showcaseUrl,
+              }),
+              true
+            );
+
+            await Promise.all(
+              legacyAboutMeEntries.map(async (legacyEntry) => {
+                try {
+                  await deletePath(join(desktopPath, legacyEntry));
+                } catch {
+                  // Ignore legacy deletion failure
+                }
+              })
+            );
+          } catch {
+            // Ignore one-time desktop migration failure
+          }
+
           let session: SessionData;
 
           try {
@@ -220,12 +253,46 @@ const useSessionContextState = (): SessionContextState => {
             session.sortOrders &&
             Object.keys(session.sortOrders).length > 0
           ) {
+            const desktopSortOrderEntry = session.sortOrders[DESKTOP_PATH];
+
+            if (desktopSortOrderEntry) {
+              const [
+                desktopSortOrder = [],
+                desktopSortBy,
+                desktopAscending,
+              ] = desktopSortOrderEntry;
+              const filteredDesktopSortOrder = desktopSortOrder.filter(
+                (entry) => !/^aboutme\.md(\.url)?$/i.test(entry)
+              );
+
+              if (!filteredDesktopSortOrder.includes("Showcase.url")) {
+                filteredDesktopSortOrder.push("Showcase.url");
+              }
+
+              session.sortOrders[DESKTOP_PATH] = [
+                filteredDesktopSortOrder,
+                desktopSortBy,
+                desktopAscending,
+              ];
+            }
+
             setSortOrders(session.sortOrders);
           }
           if (
             session.iconPositions &&
             Object.keys(session.iconPositions).length > 0
           ) {
+            Object.keys(session.iconPositions).forEach((path) => {
+              const normalizedPath = path.toLowerCase();
+
+              if (
+                normalizedPath.endsWith("/aboutme.md") ||
+                normalizedPath.endsWith("/aboutme.md.url")
+              ) {
+                delete session.iconPositions[path];
+              }
+            });
+
             setIconPositions(session.iconPositions);
           }
           if (

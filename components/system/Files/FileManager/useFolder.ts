@@ -199,9 +199,29 @@ const useFolder = (
         setIsLoading(true);
 
         try {
-          const dirContents = (await readdir(directory)).filter(
-            filterSystemFiles(directory)
-          );
+          const rawDirContents = await readdir(directory);
+          const legacyAboutMeEntries =
+            directory === DESKTOP_PATH
+              ? rawDirContents.filter((entry) =>
+                  /^aboutme\.md(\.url)?$/i.test(entry)
+                )
+              : [];
+
+          if (legacyAboutMeEntries.length > 0) {
+            await Promise.all(
+              legacyAboutMeEntries.map(async (entry) => {
+                try {
+                  await deletePath(join(directory, entry));
+                } catch {
+                  // Ignore legacy desktop entry deletion failures
+                }
+              })
+            );
+          }
+
+          const dirContents = rawDirContents
+            .filter((entry) => !/^aboutme\.md(\.url)?$/i.test(entry))
+            .filter(filterSystemFiles(directory));
 
           if (preloadShortcuts) {
             preloadLibs(
