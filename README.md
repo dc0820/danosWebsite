@@ -2,7 +2,6 @@
 
 ## _Desktop environment in the browser_
 
-
 # System 🧠
 
 ### [File System](https://github.com/jvilk/BrowserFS)
@@ -260,4 +259,4 @@ docker run -dp 8080:8080 --rm --name danos danos
 
 ##### Notes
 
-- If during `yarn install` you receive the error `digital envelope routines::unsupported`, you need to set `NODE_OPTIONS` to `--openssl-legacy-provider` [1](https://stackoverflow.com/a/69699772/5895982))
+- If during `yarn install` you receive the error `digital envelope routines::unsupported`, you need to set `NODE_OPTIONS` to `--openssl-legacy-provider` [1](https://stackoverflow.com/a/69699772/5895982)
