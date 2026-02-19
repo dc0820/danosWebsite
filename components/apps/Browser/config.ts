@@ -13,6 +13,11 @@ export const bookmarks: Bookmark[] = [
     url: "https://www.google.com/webhp?igu=1",
   },
   {
+    icon: "/System/Icons/Favicons/github.webp",
+    name: "Github",
+    url: "https://github.com/dc0820/",
+  },
+  {
     icon: "/System/Icons/Favicons/wikipedia.webp",
     name: "Wikipedia",
     url: "https://www.wikipedia.org/",
