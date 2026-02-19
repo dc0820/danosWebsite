@@ -24,8 +24,8 @@ export const bookmarks: Bookmark[] = [
   },
   {
     icon: FAVICON_BASE_PATH,
-    name: "daedalOS",
-    url: "https://dustinbrett.com/",
+    name: "danOS",
+    url: "https://danos-website-gsxi.vercel.app/",
   },
   {
     icon: "/System/Icons/Favicons/win96.webp",
