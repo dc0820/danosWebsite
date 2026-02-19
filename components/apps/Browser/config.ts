@@ -15,7 +15,7 @@ export const bookmarks: Bookmark[] = [
   {
     icon: "/System/Icons/Favicons/github.webp",
     name: "Github",
-    url: "https://github.com/dc0820/",
+    url: "https://github.com/dc0820",
   },
   {
     icon: "/System/Icons/Favicons/wikipedia.webp",
